@@ -1,0 +1,50 @@
+//Funcionalidades del programa
+
+1.Registrar información
+
+información de cada curso
+-Código
+-Nombre
+-Número de creditos
+-Horas de trabajo con docente
+ Horas de trabajo independiente (((NC * 48)/16)-HTD) 
+ casos especiales: inglés=8
+			 Vivamos la universidad = 0
+-Horario de clases del curso (se le pide al usuario dias y horas)(hora militar)
+
+2.Registrar los cursos en el horario
+pedida al usuario
+
+3.sugerir espacio para registrar HTI
+busca un hueco libre y lo sugiere al usuario
+tambien se da la opción de añadir manualmente
+
+//Formato archivo externo con los datos
+
+1.horario.txt
+
+El archivo contiene la informacion registrada de las HTD, HTI y horas libres
+
+formato:
+
+codigo6;codigo7;codigo8;codigo9;codigo10;codigo11;codigo12;codigo13;codigo14;codigo15;codigo16;codigo17;codigo18;codigo19;codigo20;codigo21; (dia lunes)
+codigo6;codigo7;codigo8;codigo9;codigo10;codigo11;codigo12;codigo13;codigo14;codigo15;codigo16;codigo17;codigo18;codigo19;codigo20;codigo21; (dia X)
+
+Cada linea corresponde a un dia de la semana y cada hora guarda el código de el curso separados por ';', solo se contiene la informacion de 16 horas diarias empezando a las 6 y terminando a las 22, el resto son horas de sueño.
+
+códigos predefinidos:
+0000000 = hora libre
+
+2.cursos.txt
+
+El archivo contiene la informacion de cada curso con el seguiente formato:
+
+codigo;nombreCurso;creditos;HTD;HTI (curso 1)
+codigo;nombreCurso;creditos;HTD;HTI (curso n)
+
+Cada linea corresponde a un curso y contiene toda su información.
+
+//Formato base de datos
+
+La informacion del archivo 'horario.txt' se va a contener en un arreglo bidimensional [dia][codigoCurso]
+la informacion del archivo 'cursos.txt' se va a contener en un arreglo tridimensional [cursos][tipo de información][información]
