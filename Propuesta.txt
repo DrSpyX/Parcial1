@@ -1,8 +1,8 @@
-//Funcionalidades del programa
+//Metodos del programa
 
 1.Registrar información
 
-información de cada curso
+pedir información de cada curso
 -Código
 -Nombre
 -Número de creditos
@@ -12,12 +12,23 @@ información de cada curso
 			 Vivamos la universidad = 0
 -Horario de clases del curso (se le pide al usuario dias y horas)(hora militar)
 
+registrar infomacion de los cursos en el archivo
+
+leer informacion de los cursos del archivo
+
 2.Registrar los cursos en el horario
-pedida al usuario
+
+crear horario vacio
+
+actualizar horario en el archivo
+
+leer horario del archivo
+
+imprimir horario en consola
 
 3.sugerir espacio para registrar HTI
-busca un hueco libre y lo sugiere al usuario
-tambien se da la opción de añadir manualmente
+
+busca un hueco libre y lo sugiere al usuario, tambien se da la opción de añadir manualmente
 
 //Formato archivo externo con los datos
 
