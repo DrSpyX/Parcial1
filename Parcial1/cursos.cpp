@@ -1,4 +1,5 @@
 #include "cursos.h"
+#include "cadenas.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -7,19 +8,6 @@ using namespace std;
 
 ifstream fin;
 ofstream fout;
-
-void concatenar(char *cadena1, char *cadena2){
-    int i = 0, j = 0;
-    while (cadena1[i] != '\0') {
-        i++;
-    }
-    while (cadena2[j] != '\0') {
-        cadena1[i] = cadena2[j];
-        i++;
-        j++;
-    }
-    cadena1[i] = '\0';
-}
 
 char* pedirDatos(){                   //pide los datos de un curso al usuario y los devuelve en una cadena con el formato codigo;nombreCurso;creditos;HTD;HTI
     char* data = new char[110];
@@ -63,13 +51,14 @@ char* pedirDatos(){                   //pide los datos de un curso al usuario y 
     concatenar(data,separador);
     temp[0] = static_cast<char>(HTI+48);
     concatenar(data,temp);
+    concatenar(data,separador);
     separador[0] = '\n';
     concatenar(data,separador);
 
     return data;
 }
 
-void regCurso(char *cursoData){  //agrega el nuevo curso al archivo que contiene la informacion de los cursos
+void regCurso(char *cursoData){  //agrega el nuevo curso al archivo que contiene la informacion de los cursos(todos los datos del curso organizados)
     try{
 
         fout.open("cursosData.txt", ios::app);                      //abre el archivo modo append
@@ -90,4 +79,52 @@ void regCurso(char *cursoData){  //agrega el nuevo curso al archivo que contiene
     }
 }
 
+char*** leerCursos(){
+    char*** cursos = new char**[8];
+    int k=0;
 
+    try{
+        fin.open("cursosData.txt");                   //abre el archivo para lectura
+        if(!fin.is_open()){
+            throw '1';
+        }
+
+        char c;
+        int numLineas = 0;
+
+        while (fin.get(c)) {
+            if (c == '\n') {
+                numLineas++;
+            }
+        }
+
+        fin.close();
+        fin.open("cursosData.txt");
+
+        for(int i = 0; i < numLineas; ++i) {
+            cursos[i] = new char*[5];
+            for(int j = 0; j < 5; ++j) {
+                cursos[i][j] = new char[50];
+                k = 0;
+                while(fin.peek() != ';'){
+                    cursos[i][j][k] = fin.get();
+                    k++;
+                }
+                cursos[i][j][k] = '\0';
+                fin.ignore();
+            }
+            fin.ignore();
+        }
+        fin.close();                        //Cierra el archivo
+    }
+    catch (char c){
+        cout<<"Error # "<<c<<": ";
+        if(c=='1'){
+            cout<<"Error al abrir el archivo para lectura."<<endl;
+        }
+    }
+    catch (...){
+        cout<<"Error no definido"<<endl;
+    }
+    return cursos;
+}

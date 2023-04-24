@@ -1,5 +1,5 @@
-#include "cursos.h"
 #include "horario.h"
+#include "cadenas.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -34,9 +34,11 @@ void actualizarHorario(char*** horario){        //actualiza el horario en el arc
             concatenar(data,horario[i][j]);
             concatenar(data,separador);
         }
+        separador[0] = '\n';
+        concatenar(data,separador);
+        separador[0] = ';';
     }
 
-    cout<<data<<endl;
     try{
         fout.open("horario.txt");                      //abre el archivo para escritura
         if(!fout.is_open()){
@@ -58,7 +60,6 @@ void actualizarHorario(char*** horario){        //actualiza el horario en el arc
 
 char*** leerHorario(){
     char*** horario = new char**[6];
-    streampos pos;
 
     try{
         fin.open("horario.txt");                   //abre el archivo para lectura
@@ -74,7 +75,9 @@ char*** leerHorario(){
                     horario[i][j][k] = fin.get();
                 }
                 horario[i][j][7] = '\0';
+                fin.ignore();
             }
+            fin.ignore();
         }
         fin.close();                        //Cierra el archivo
     }
@@ -90,6 +93,15 @@ char*** leerHorario(){
     return horario;
 }
 
-//void imprimirHorario(char*** horario){
-
-//}
+void imprimirHorario(char*** horario, char*** iCursos){
+    char codigoCurso[8];
+    char libre[8] = {'0','0','0','0','0','0','0','\0'};
+    for(int i = 0; i < 6; ++i) {
+        for(int j = 0; j < 16; ++j) {
+            copiar(codigoCurso,horario[i][j]);
+            if(comparar(codigoCurso,libre)==true){
+                cout<<"libre"<<endl;
+            }
+        }
+    }
+}

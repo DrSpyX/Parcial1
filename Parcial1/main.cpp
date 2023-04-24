@@ -5,25 +5,46 @@
 
 using namespace std;
 
+int select(int no){                     //pide un numero al usuario para navegar a travez de menus (numero de opciones)
+    int selUser = 0;
+    while(selUser < 1 || selUser > no){
+        cin >> selUser;
+    }
+    return selUser;
+}
+
 int main()
 {
-    char* datosCurso = new char[110];
-    char*** horario;
+    char* datosCurso = new char[110];     //contiene informacion del curso pedido al usuario
+    char*** horario;           //contiene el horario
+    char*** cursos;            //contiene informacion de todos los cursos
 
-    //datosCurso = pedirDatos();
-    //cout<<datosCurso<<endl;
-    //regCurso(datosCurso);
+    int eleccionMP = 0;
 
-    horario = crearHorario();
-    for(int i = 0; i < 6; ++i) {
-        for(int j = 0; j < 16; ++j) {
-            for(int k = 0; k < 8; ++k) {
-                cout<<horario[i][j][k];
+    while(true){
+        cout<<"Agenda"<<endl<<"1. Crear nueva agenda"<<endl<<"2. Ver agenda"<<endl<<"3. Salir"<<endl;
+        eleccionMP = select(3);
+
+        if(eleccionMP==1){
+            horario = crearHorario();
+        }
+        else if(eleccionMP==2){
+            horario = leerHorario();
+            cursos = leerCursos();
+            cout<<"Horario"<<endl;
+            imprimirHorario(horario, cursos);
+            int eleccionVa = 0;
+            while(true){
+                cout<<"1. Salir"<<endl;
+                eleccionVa = select(1);
+                if(eleccionVa==1){
+                    break;
+                }
             }
         }
+        else if(eleccionMP==3){
+            break;
+        }
     }
-
-    actualizarHorario(horario);
-
     return 0;
 }
