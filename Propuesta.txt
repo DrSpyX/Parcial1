@@ -39,12 +39,12 @@ códigos predefinidos:
 
 El archivo contiene la informacion de cada curso con el seguiente formato:
 
-codigo;nombreCurso;creditos;HTD;HTI (curso 1)
-codigo;nombreCurso;creditos;HTD;HTI (curso n)
+codigo;nombreCurso;creditos;HTD;HTI; (curso 1)
+codigo;nombreCurso;creditos;HTD;HTI; (curso n)
 
 Cada linea corresponde a un curso y contiene toda su información.
 
 //Formato base de datos
 
-La informacion del archivo 'horario.txt' se va a contener en un arreglo bidimensional [dia][codigoCurso]
-la informacion del archivo 'cursos.txt' se va a contener en un arreglo tridimensional [cursos][tipo de información][información]
+La informacion del archivo 'horario.txt' se va a contener en un char*** [tridimensional [dia][hora][codigoCurso]
+la informacion del archivo 'cursos.txt' se va a contener en un char*** [cursos][0:codigo, 1:nombre del curso, 2:creditos, 3:HTD, 4:HTI][información]
