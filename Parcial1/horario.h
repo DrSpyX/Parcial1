@@ -5,6 +5,6 @@
 char*** crearHorario();
 void actualizarHorario(char*** horario);
 char*** leerHorario();
-void imprimirHorario(char*** horario, char*** iCursos);
+void imprimirHorario(char*** horario, char*** iCursos, int cantCursos);
 
 #endif // HORARIO_H
