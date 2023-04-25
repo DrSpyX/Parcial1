@@ -18,6 +18,7 @@ int main()
     char* datosCurso = new char[110];     //contiene informacion del curso pedido al usuario
     char*** horario;           //contiene el horario
     char*** cursos;            //contiene informacion de todos los cursos
+    int nCursos = 0;           //numero de cursos registrados
 
     int eleccionMP = 0;
 
@@ -32,7 +33,8 @@ int main()
             horario = leerHorario();
             cursos = leerCursos();
             cout<<"Horario"<<endl;
-            imprimirHorario(horario, cursos);
+            nCursos = cantCursos();
+            imprimirHorario(horario, cursos, nCursos);
             int eleccionVa = 0;
             while(true){
                 cout<<"1. Salir"<<endl;
