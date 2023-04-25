@@ -15,7 +15,7 @@ char* pedirDatos(){                   //pide los datos de un curso al usuario y 
     int creditos;
     int HTD;
     int HTI;
-    char separador[2] = {';', '\0'};
+    char separador[2] = {';', '\0'};    //separa la informacion en el archivo
 
     data[0] = '\0';
 
@@ -43,7 +43,7 @@ char* pedirDatos(){                   //pide los datos de un curso al usuario y 
     }
 
     char temp[2];
-    temp[0] = static_cast<char>(creditos+48);
+    temp[0] = static_cast<char>(creditos+48);       //convierte los numeros almacenados en int a char para almacenarlos en la variable con el resto de información
     concatenar(data,temp);
     concatenar(data,separador);
     temp[0] = static_cast<char>(HTD+48);
@@ -52,13 +52,13 @@ char* pedirDatos(){                   //pide los datos de un curso al usuario y 
     temp[0] = static_cast<char>(HTI+48);
     concatenar(data,temp);
     concatenar(data,separador);
-    separador[0] = '\n';
+    separador[0] = '\n';            //agrega un salto de linea para indicar que se acaba la información de un curso
     concatenar(data,separador);
 
     return data;
 }
 
-void regCurso(char *cursoData){  //agrega el nuevo curso al archivo que contiene la informacion de los cursos(todos los datos del curso organizados)
+void regCurso(char *cursoData){  //agrega el nuevo curso al archivo que contiene la información de los cursos(todos los datos del curso organizados)
     try{
 
         fout.open("cursosData.txt", ios::app);                      //abre el archivo modo append
@@ -79,10 +79,8 @@ void regCurso(char *cursoData){  //agrega el nuevo curso al archivo que contiene
     }
 }
 
-char*** leerCursos(){
-    char*** cursos = new char**[8];
-    int k=0;
-
+int cantCursos(){
+    int numLineas = 0;
     try{
         fin.open("cursosData.txt");                   //abre el archivo para lectura
         if(!fin.is_open()){
@@ -90,30 +88,52 @@ char*** leerCursos(){
         }
 
         char c;
-        int numLineas = 0;
 
-        while (fin.get(c)) {
+        while (fin.get(c)) {         //obtiene la cantidad de lineas que hay en el archivo para saber la cantidad de cursos registrados
             if (c == '\n') {
                 numLineas++;
             }
         }
 
         fin.close();
-        fin.open("cursosData.txt");
+    }
+    catch (char c){
+        cout<<"Error # "<<c<<": ";
+        if(c=='1'){
+            cout<<"Error al abrir el archivo para lectura."<<endl;
+        }
+    }
+    catch (...){
+        cout<<"Error no definido"<<endl;
+    }
 
-        for(int i = 0; i < numLineas; ++i) {
+    return numLineas;
+}
+
+char*** leerCursos(){                   //lee la información de los cursos registrados en el archivo "cursosData.txt"
+    char*** cursos = new char**[8];
+    int k=0;
+    int numLineas = cantCursos();
+
+    try{
+        fin.open("cursosData.txt");                   //abre el archivo para lectura
+        if(!fin.is_open()){
+            throw '1';
+        }
+
+        for(int i = 0; i < numLineas; ++i) {        //crea los arreglos de las diferentes dimensiones
             cursos[i] = new char*[5];
             for(int j = 0; j < 5; ++j) {
                 cursos[i][j] = new char[50];
                 k = 0;
                 while(fin.peek() != ';'){
-                    cursos[i][j][k] = fin.get();
+                    cursos[i][j][k] = fin.get();        //agrega un carácter del archivo al arreglo
                     k++;
                 }
                 cursos[i][j][k] = '\0';
-                fin.ignore();
+                fin.ignore();       //no agrega el ';'
             }
-            fin.ignore();
+            fin.ignore();       //no agrega el salto de linea
         }
         fin.close();                        //Cierra el archivo
     }
