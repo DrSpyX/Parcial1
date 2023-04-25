@@ -13,7 +13,7 @@ void concatenar(char* cadena1, char* cadena2){          //concatena dos cadenas(
     cadena1[i] = '\0';
 }
 
-void copiar(char* copia, char* original) {  //crea una copia de una cadena
+void copiar(char* copia, char* original) {      //crea una copia de una cadena
     int i = 0;
     while (original[i] != '\0') {
         copia[i] = original[i];
@@ -22,7 +22,7 @@ void copiar(char* copia, char* original) {  //crea una copia de una cadena
     copia[i] = '\0';
 }
 
-bool comparar(const char* cadena1, const char* cadena2) {
+bool comparar(const char* cadena1, const char* cadena2) {       //comprara dos cadenas para saber si son iguales
     int i = 0;
     while (cadena1[i] != '\0' && cadena2[i] != '\0') {
         if (cadena1[i] != cadena2[i]) {
