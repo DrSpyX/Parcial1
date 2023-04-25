@@ -148,3 +148,23 @@ char*** leerCursos(){                   //lee la información de los cursos regi
     }
     return cursos;
 }
+
+void delCursos(){  //elimina todos los cursos registrados
+    try{
+
+        fout.open("cursosData.txt", ios::trunc);                      //abre el archivo modo trunc para eliminar la información
+        if(!fout.is_open()){
+            throw '1';
+        }
+        fout.close();                            //cierra el archivo
+    }
+    catch (char c){
+        cout<<"Error # "<<c<<": ";
+        if(c=='1'){
+            cout<<"Error al abrir el archivo para escritura.\n";
+        }
+    }
+    catch (...){
+        cout<<"Error no definido\n";
+    }
+}
