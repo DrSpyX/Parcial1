@@ -2,10 +2,7 @@
 #define JORNADA_H
 
 
-class jornada
-{
-public:
-    jornada();
-};
+void regHTD(char*** horario, char*** iCursos, int cantCursos);
+void regHTI(char*** horario, char*** iCursos, int cantCursos);
 
 #endif // JORNADA_H
