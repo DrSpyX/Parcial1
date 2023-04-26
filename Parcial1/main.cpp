@@ -1,5 +1,4 @@
 #include <iostream>
-#include <limits>
 #include "cursos.h"
 #include "horario.h"
 #include "jornada.h"
@@ -44,33 +43,28 @@ int main()
                 }
                 cursos = leerCursos();
                 regHTD(horario, cursos, nCursos);   //registra las HTD en el horario
-                regHTI(horario, cursos, nCursos);   //registra las HTI en el horario
-                cout<<"HORARIO"<<endl;
-                imprimirHorario(horario, cursos, nCursos);
                 actualizarHorario(horario);
-                while(true){
-                    cout<<"1. Salir"<<endl;
-                    eleccion = select(1);
-                    if(eleccion==1){
-                        break;
-                    }
-                }
+                regHTI(horario, cursos, nCursos);   //registra las HTI en el horario
+
+                cout<<"HORARIO"<<endl;
+                imprimirHorario(horario, cursos, nCursos);  //imprime el horario en consola
+
+                actualizarHorario(horario);
+
+                cout<<"1. Salir"<<endl;
+                select(1);
             }
         }
-        else if(eleccion==2){
+        else if(eleccion==2){       //imprime el horario en consola
             horario = leerHorario();
             cursos = leerCursos();
             nCursos = cantCursos();
+
             cout<<"HORARIO"<<endl;
             imprimirHorario(horario, cursos, nCursos);
-            int eleccionVa = 0;
-            while(true){
-                cout<<"1. Salir"<<endl;
-                eleccionVa = select(1);
-                if(eleccionVa==1){
-                    break;
-                }
-            }
+
+            cout<<"1. Salir"<<endl;
+            select(1);
         }
         else if(eleccion==3){
             break;
