@@ -96,12 +96,12 @@ char*** leerHorario(){
 void imprimirHorario(char*** horario, char*** iCursos, int cantCursos){         //imprime el horario en consola(contiene el horario, contiene la informacion de los cursos, cantidad de cursos registrados)
     char codigoCurso[8];        //almacena una copia del codigo del curso que se va a imprimir
     char libre[8] = {'0','0','0','0','0','0','0','\0'};
-    char dias[6][10] = {"lunes", "martes", "miercoles", "jueves", "viernes", "sabado"};
+    char dias[6][10] = {"LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO"};
     for(int i = 0; i < 6; ++i) {
         cout<<endl<<dias[i]<<endl;
         for(int j = 0; j < 16; ++j) {
             copiar(codigoCurso,horario[i][j]);
-            cout<<8+j<<":00 ";
+            cout<<6+j<<":00 ";
             if(comparar(codigoCurso,libre)==true){      //verifica si el codigo del curso actual corresponde a hora libre
                 cout<<"libre"<<endl;
             }

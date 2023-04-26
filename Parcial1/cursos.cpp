@@ -1,5 +1,6 @@
 #include "cursos.h"
 #include "cadenas.h"
+#include <limits>
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -19,6 +20,8 @@ char* pedirDatos(){                   //pide los datos de un curso al usuario y 
 
     data[0] = '\0';
 
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout<<"ingrese el codigo del curso"<<endl;
     cin.getline(entrada,50,'\n');
     concatenar(data,entrada);
