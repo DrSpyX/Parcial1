@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include "cursos.h"
 #include "horario.h"
 #include "jornada.h"
@@ -8,7 +9,7 @@ using namespace std;
 int select(int no){                     //pide un numero al usuario para navegar a travez de menus (numero de opciones)
     int selUser = 0;
     while(selUser < 1 || selUser > no){
-        cin >> selUser;
+        cin>>selUser;
     }
     return selUser;
 }
@@ -19,21 +20,48 @@ int main()
     char*** horario;           //contiene el horario
     char*** cursos;            //contiene informacion de todos los cursos
     int nCursos = 0;           //numero de cursos registrados
-
-    int eleccionMP = 0;
+    int eleccion = 0;        //eleccion del usuario en el menú
 
     while(true){
         cout<<"Agenda"<<endl<<"1. Crear nueva agenda"<<endl<<"2. Ver agenda"<<endl<<"3. Salir"<<endl;
-        eleccionMP = select(3);
+        eleccion = select(3);
 
-        if(eleccionMP==1){
-            horario = crearHorario();
+        if(eleccion==1){
+            cout<<"Se eliminara la agenda anterior"<<endl<<"1. Continuar"<<endl<<"2. Volver"<<endl;
+            eleccion = select(2);
+            if(eleccion==1){
+                horario = crearHorario();
+                actualizarHorario(horario);
+                delCursos();      //elimina el horario y cursos anteriores
+
+                cout<<"Cuantos cursos desea registrar?"<<endl;
+                cin>>nCursos;
+                for(int i = 1; i <= nCursos; i++){        //registra los cursos
+                    cout<<"Curso "<<i<<endl;
+                    datosCurso = pedirDatos();
+                    regCurso(datosCurso);
+                    delete[] datosCurso;
+                }
+                cursos = leerCursos();
+                regHTD(horario, cursos, nCursos);   //registra las HTD en el horario
+                regHTI(horario, cursos, nCursos);   //registra las HTI en el horario
+                cout<<"HORARIO"<<endl;
+                imprimirHorario(horario, cursos, nCursos);
+                actualizarHorario(horario);
+                while(true){
+                    cout<<"1. Salir"<<endl;
+                    eleccion = select(1);
+                    if(eleccion==1){
+                        break;
+                    }
+                }
+            }
         }
-        else if(eleccionMP==2){
+        else if(eleccion==2){
             horario = leerHorario();
             cursos = leerCursos();
-            cout<<"Horario"<<endl;
             nCursos = cantCursos();
+            cout<<"HORARIO"<<endl;
             imprimirHorario(horario, cursos, nCursos);
             int eleccionVa = 0;
             while(true){
@@ -44,7 +72,7 @@ int main()
                 }
             }
         }
-        else if(eleccionMP==3){
+        else if(eleccion==3){
             break;
         }
     }
